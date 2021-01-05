@@ -1,0 +1,6 @@
+.App {
+  text-align: center;
+}
+
+* { touch-action: pan-y; } 
+/*@import '~antd/dist/antd.css'*/

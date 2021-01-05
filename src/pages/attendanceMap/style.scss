@@ -1,0 +1,49 @@
+.attendance_card{
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    font-size: 0.32rem;
+    .plan_content{
+        position: relative;
+        padding-bottom: 0.2rem;
+    }
+    .plan_foot{
+        position: fixed;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 0.2rem;
+        font-size: 0.2rem;
+        z-index: 100;
+        bottom: 0;
+        border-top: 1px solid #ddd;
+        .myposbtn{
+            padding: 0.2rem;
+            top: -1.3rem;
+            position: absolute;
+            width: 0.6rem;
+            height: 0.6rem;
+            right: 0.6rem;
+            z-index: 100000000000;
+            background: #fff;
+            border-radius: 0.2rem;
+            img{
+                width: 0.6rem;
+            }
+        }
+        p{
+            line-height: 0.6rem;
+            padding: 0 0.12rem;
+        }
+        .am-button{
+            border-radius: 0.5rem;
+            height: 1rem;
+            line-height: 1rem;
+            background: #0c53a5;
+            color: #fff;
+        }
+        .am-button.am-button-disabled{
+            background: #aaaaaa;
+        }
+    }
+
+}

@@ -1,0 +1,95 @@
+.attendance_cardComp{
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    font-size: 0.32rem;
+
+       .color8{
+           color: #888888;
+       }
+       .plan_list_box{
+           background: #fff;
+           padding: 0.4rem 0.2rem;
+       }
+       .plan_list_attend{
+            margin-left: 0.3rem;
+            border-left: 2px solid #eee;
+            padding: 0 0.2rem 0.3rem 0.4rem;
+            position: relative;
+            min-height: 3rem;
+            .line_circle{
+                width: 0.4rem;
+                height: 0.4rem;
+                box-sizing: border-box;
+                border: 1px solid #a0a0a0;
+                display: inline-block;
+                position: absolute;
+                background: #fff;
+                border-radius: 0.2rem;
+                left: -0.2rem;
+                top: 0;
+            }
+            .line_circle::after{
+                content: '';
+                width: 0.2rem;
+                height: 0.2rem;
+                border-radius: 0.1rem;
+                background: #a0a0a0;
+                position: absolute;
+                left: calc(50% - 0.1rem);
+                top: calc(50% - 0.1rem);
+            }
+            
+            .plan_center{
+                p{
+                   font-size: 0.26rem;
+                }
+                .signTime{
+                    font-size: 0.32rem;
+                    span{
+                        font-weight: 600;
+                    }
+                }
+                .attend_sign_btn{
+                    border-radius: 1.5rem;
+                    left: 40%;
+                    width: 3rem;
+                    height: 3rem;
+                    position: relative;
+                    transform: translateX(-50%);
+                    background: #aaa;
+                    .sign_time{
+                        left: 50%;
+                        position: absolute;
+                        color: #fff;
+                        font-size: 0.32rem;
+                        top: 40%;
+                        transform: translate(-50%, -50%);
+                        pointer-events: none;
+                        line-height: 0.5rem;
+                    }
+                    img.sign_bg{
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                   
+                }
+                .sign_tip{
+                    margin-bottom: 0.6rem;
+                    text-align: center;
+                    line-height: 1rem;
+                    color: #888888;
+                    .sign_tip_pos{
+                        color: #0c530c;
+                        line-height: 0.4rem;
+                    }
+                }
+              
+            }
+            
+       }
+       .plan_list_attend:last-child{
+           border: 0;
+       }
+
+}
