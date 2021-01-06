@@ -17,12 +17,18 @@ function getTime() {
     return time1;
 }
 
-class AttendanceCardComp extends React.Component {
+class AttendanceCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            myattendanceData:{},        // 打卡数据
-            currentTime:getTime(),             // 时间计时器
+            currentTime:getTime(),             
+
+            actAttendanceInfo:{                 
+                address:"北京市海淀区西二旗桥",      // 测试地址
+                jd:'116.310473',                      // 经度
+                wd:'40.061396',                       // 纬度
+                range:'1000',                       // 距离打卡地点范围
+            }
             
         };
     }
@@ -48,11 +54,7 @@ class AttendanceCardComp extends React.Component {
     // 跳转到考勤打卡页面
     gotoattendcard = (type) => {
    
-        window.localStorage.setItem('actAttendanceInfo',JSON.stringify({
-            jd: "116.295691",   // 测试 精度
-            wd: "40.052094",    // 测试 纬度
-            range:'1000',       // 当前地点距离考勤地点范围
-        }))
+        window.localStorage.setItem('actAttendanceInfo',JSON.stringify(this.state.actAttendanceInfo))
 
         this.props.gotocard(type)
     }
@@ -60,6 +62,7 @@ class AttendanceCardComp extends React.Component {
     render() {
         let {
             currentTime,
+            actAttendanceInfo,
             } = this.state;
 
         return (
@@ -69,7 +72,7 @@ class AttendanceCardComp extends React.Component {
                             <span className="line_circle"></span>
                             <div className="plan_center">
                                 <p className="signTime"> 签到时间 08:30:00 - 09:00:00</p>
-                                <p><img style={{display:'inline-block',marginRight:'0.2rem',width:'0.36rem',verticalAlign: "middle"}} src={Imgdefplace}></img>北京市海淀区西二旗软件园一期18号楼</p>
+                                <p><img style={{display:'inline-block',marginRight:'0.2rem',width:'0.36rem',verticalAlign: "middle"}} src={Imgdefplace}></img>{actAttendanceInfo.address}</p>
                             </div>
                             <div className="plan_center">
                                <div className='attend_sign_btn'>
@@ -84,7 +87,7 @@ class AttendanceCardComp extends React.Component {
                             <span className="line_circle"></span>
                            <div className="plan_center">
                                 <p className="signTime"> 签退时间 16:30:00 - 15:00:00</p>
-                                <p><img style={{display:'inline-block',marginRight:'0.2rem',width:'0.36rem',verticalAlign: "middle"}} src={Imgdefplace}></img>北京市海淀区西二旗软件园一期18号楼</p>
+                                <p><img style={{display:'inline-block',marginRight:'0.2rem',width:'0.36rem',verticalAlign: "middle"}} src={Imgdefplace}></img>{actAttendanceInfo.address}</p>
                             </div>
                            
                           </div>
@@ -99,4 +102,4 @@ class AttendanceCardComp extends React.Component {
     }
 }
 
-export default AttendanceCardComp;
+export default AttendanceCard;

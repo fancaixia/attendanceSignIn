@@ -23,21 +23,20 @@ function getSearchParamByKey(key) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-class AttendanceCard extends React.Component {
+class AttendanceMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loading:true,
-            inrange:false,          // 1不在   2在考勤范围内
-            myaddress:'',          // 我的位置
+            inrange:false,          // 是否在考勤范围内（1是   2否）
+            myaddress:'',           // 我的位置
             currentTime:'',
             showattendance:false,   // 打卡提示信息
-            signattendTime:'',     // 打卡时的时间
+            signattendTime:'',      // 打卡时的时间
             mypoint:{},             // 记录我的坐标
         };
     }
     componentWillMount() {
-        // console.log(window.localStorage.getItem('actAttendanceInfo'),":经纬度")
         this.setState({
             actAttendanceInfo:JSON.parse(window.localStorage.getItem('actAttendanceInfo')),
             signType:getSearchParamByKey('signType')
@@ -108,7 +107,6 @@ class AttendanceCard extends React.Component {
 
                         // 创建新的标注开始
                         var pt2 = new BMap.Point(r.point.lng , r.point.lat );
-                        // var pt2 = new BMap.Point(116.294211,40.052504 );
 
                         var myIcon2 = new BMap.Icon(MyposImg, new BMap.Size(42,53));
                         var marker2 = new BMap.Marker(pt2,{icon:myIcon2});  // 创建标注
@@ -130,15 +128,9 @@ class AttendanceCard extends React.Component {
                             _$that.setState({
                                 myaddress: posrs.address,
                                 mypoint:r.point,
-                                // mypoint:{
-                                //     lng: 116.294211,
-                                //     lat: 40.052504
-                                // },
-
             
                             },()=>{
                                 // 计算是否在考勤范围内
-                                // var pointA = new BMap.Point(r.point.lng , r.point.lat);  // 学员位置
                                 var pointB = new BMap.Point(actAttendanceInfo.jd,actAttendanceInfo.wd);     // 活动地点位置
                                 let curDistance = (map.getDistance(pt2,pointB)).toFixed(2);
                                 // console.log('距离是：',curDistance,);  //获取两点距离,保留小数点后两位
@@ -162,7 +154,6 @@ class AttendanceCard extends React.Component {
                         // 第一次绘制
                         // 创建新的标注开始
                         var pt2 = new BMap.Point(r.point.lng , r.point.lat );
-                        // var pt2 = new BMap.Point(116.294211,40.052504 );
 
                         var myIcon2 = new BMap.Icon(MyposImg, new BMap.Size(42,53));
                         var marker2 = new BMap.Marker(pt2,{icon:myIcon2});  // 创建标注
@@ -180,19 +171,13 @@ class AttendanceCard extends React.Component {
                         // 使用经纬度换取 位置信息
                         var geoc = new BMap.Geocoder();   
                         geoc.getLocation(pt2, function(posrs){
-                            // console.log(posrs,":posrs")
                             _$that.setState({
                                 myaddress: posrs.address,
                                 mypoint:r.point,
-                                // mypoint:{
-                                //     lng: 116.294211,
-                                //     lat: 40.052504
-                                // },
 
             
                             },()=>{
                                 // 计算是否在考勤范围内
-                                // var pointA = new BMap.Point(r.point.lng , r.point.lat);  // 学员位置
                                 var pointB = new BMap.Point(actAttendanceInfo.jd,actAttendanceInfo.wd);     // 活动地点位置
                                 let curDistance = (map.getDistance(pt2,pointB)).toFixed(2);
                                 // console.log('距离是：',curDistance,);  //获取两点距离,保留小数点后两位
@@ -273,15 +258,17 @@ class AttendanceCard extends React.Component {
             loading:true,
         })
 
+        let that = this;
+
         // 根据学员位置经纬度 获取地点名称
         var geoc = new BMap.Geocoder();  
         geoc.getLocation(newpoint, function(rs){
             // console.log(rs,":学员位置信息")
 
                setTimeout(()=>{
-                this.setState({
+                that.setState({
                     loading:false,
-                    signattendTime:this.getTime(),
+                    signattendTime:that.getTime(),
                     showattendance:true,
                 })
                },1000)
@@ -353,8 +340,8 @@ class AttendanceCard extends React.Component {
                 >
                 <div className="">
                 <img style={{width:'100%'}} src={AttendSignCom}></img> 
-                <p style={{color:'#0c53a5',fontSize:'0.8rem',position:'relative',top:'-0.3rem'}}>{signattendTime}</p>
-                <p style={{color:'#0c53a5'}}>{signType== 1?'签到':'签退'}打卡成功</p>
+                <p style={{color:'#0c53a5',margin:'0',fontSize:'0.8rem',position:'relative',top:'-0.3rem'}}>{signattendTime}</p>
+                <p style={{color:'#0c53a5',margin:'0',}}>{signType== 1?'签到':'签退'}打卡成功</p>
                 </div>
                 </Modal>
 
@@ -364,4 +351,4 @@ class AttendanceCard extends React.Component {
     }
 }
 
-export default AttendanceCard;
+export default AttendanceMap;
